@@ -1,0 +1,24 @@
+﻿<Grid
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    x:Class="SurfaceGameBasics.FieldScatterView"
+    xmlns:local="clr-namespace:SurfaceGameBasics"
+	>
+
+    <Rectangle Width="500" Height="500" Stroke="Green" StrokeThickness="10"/>
+
+    <s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+		<s:ScatterViewItem Width="200" Height="120" Orientation="0.0" Name="scatterViewItem1">
+			<TextBlock Text="ScatterViewItem 1" />
+		</s:ScatterViewItem>
+
+		<s:ScatterViewItem Width="200" Height="120" Orientation="0.0" Name="scatterViewItem2">
+			<TextBlock Text="ScatterViewItem 2" />
+		</s:ScatterViewItem>
+
+	</s:ScatterView>
+</Grid>
+
+

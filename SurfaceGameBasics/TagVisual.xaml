@@ -1,0 +1,15 @@
+﻿<s:TagVisualization x:Class="SurfaceGameBasics.TagVisual"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+	xmlns:local="clr-namespace:SurfaceGameBasics"
+	>
+
+    <Grid Width="200" Height="200">
+
+        <Ellipse Fill="Blue" Opacity="0.4" />
+        <Ellipse Fill="Red" Margin="2" />
+
+    </Grid>
+	
+</s:TagVisualization>
