@@ -1,3 +1,3 @@
 SurfaceGameBasics
 =================
-Surface App with gaming basics.
+SUR40 app for experimenting with advanced tag and touch based game mechanics.
