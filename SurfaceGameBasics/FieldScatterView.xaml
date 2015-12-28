@@ -5,20 +5,35 @@
     x:Class="SurfaceGameBasics.FieldScatterView"
     xmlns:local="clr-namespace:SurfaceGameBasics"
 	>
+    <Canvas Width="500" Height="500">
+        <Rectangle Width="500" Height="500" Stroke="Green" StrokeThickness="10" x:Name="rect" />
+        <Rectangle Width="132" Height="128" Stroke="Red" StrokeThickness="5" Canvas.Left="69" Canvas.Top="203" x:Name="rectTarget"/>
+    </Canvas>
 
-    <Rectangle Width="500" Height="500" Stroke="Green" StrokeThickness="10"/>
 
     <s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-		<s:ScatterViewItem Width="200" Height="120" Orientation="0.0" Name="scatterViewItem1">
-			<TextBlock Text="ScatterViewItem 1" />
-		</s:ScatterViewItem>
+        <s:ScatterViewItem Width="50" Height="50" Orientation="0.0" x:Name="scatterViewItem1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="ScatterViewItem 1" />
+            </Grid>
+        </s:ScatterViewItem>
 
-		<s:ScatterViewItem Width="200" Height="120" Orientation="0.0" Name="scatterViewItem2">
-			<TextBlock Text="ScatterViewItem 2" />
-		</s:ScatterViewItem>
+        <s:ScatterViewItem Width="50" Height="50" Orientation="0.0" x:Name="scatterViewItem2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="ScatterViewItem 2" />
+            </Grid>
+        </s:ScatterViewItem>
 
-	</s:ScatterView>
+    </s:ScatterView>
 </Grid>
 
 
