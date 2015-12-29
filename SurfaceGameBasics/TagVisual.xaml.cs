@@ -1,6 +1,5 @@
 ﻿using Microsoft.Surface.Presentation.Input;
 using System.Windows;
-using System.Windows.Media;
 
 namespace SurfaceGameBasics
 {
@@ -12,9 +11,10 @@ namespace SurfaceGameBasics
 		{
 			InitializeComponent();
 
-			DataContext = ViewModel = new TagVisualModel();
+			DataContext = ViewModel = new TagVisualModel { View = this };
 
 			Loaded += (s, e) => ViewModel.TagAvailable(VisualizedTag);
+			Unloaded += (s, e) => ViewModel.TagUnavailable(VisualizedTag);
 		}
 	}
 
@@ -24,5 +24,15 @@ namespace SurfaceGameBasics
 		{
 			TagManagement.Instance.Value.Register(tag.Value, this);
 		}
+
+		internal void TagUnavailable(TagData tag)
+		{
+			TagManagement.Instance.Value.Unregister(tag.Value, this);
+		}
+
+		public TagVisual View { get; set; }
+		public Point Position { get { return View.Center; } }
+
+		public long Id { get; set; }
 	}
 }

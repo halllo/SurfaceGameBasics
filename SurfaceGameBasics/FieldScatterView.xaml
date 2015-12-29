@@ -7,8 +7,15 @@
 	>
     <Canvas Width="500" Height="500">
         <Rectangle Width="500" Height="500" Stroke="Green" StrokeThickness="10" x:Name="rect" />
-        <Rectangle Width="132" Height="128" Stroke="Red" StrokeThickness="5" Canvas.Left="69" Canvas.Top="203" x:Name="rectTarget"/>
+        <Rectangle Width="150" Height="150" Stroke="Red" StrokeThickness="5" Canvas.Left="-69" Canvas.Top="-70" x:Name="rectTarget1"/>
+        <Rectangle Width="150" Height="150" Stroke="Red" StrokeThickness="5" Canvas.Left="421" Canvas.Top="-70" x:Name="rectTarget2"/>
+        <Rectangle Width="150" Height="150" Stroke="Red" StrokeThickness="5" Canvas.Left="-69" Canvas.Top="420" x:Name="rectTarget3"/>
+        <Rectangle Width="150" Height="150" Stroke="Red" StrokeThickness="5" Canvas.Left="421" Canvas.Top="420" x:Name="rectTarget4"/>
     </Canvas>
+    <StackPanel Width="200" Height="200">
+        <s:SurfaceButton Width="110" Height="50" Content="Tag Position" Click="TagPosition_Click"/>
+        <Label x:Name="info"/>
+    </StackPanel>
 
 
     <s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -15,12 +15,20 @@ namespace SurfaceGameBasics
 
 		public readonly static Lazy<TagManagement> Instance = new Lazy<TagManagement>(() => new TagManagement());
 
+
 		Dictionary<long, TagVisualModel> viewModels = new Dictionary<long, TagVisualModel>();
-				
+		public IEnumerable<TagVisualModel> All { get { return viewModels.Values; } }
+
 
 		public void Register(long tag, TagVisualModel viewModel)
 		{
 			viewModels[tag] = viewModel;
+			viewModel.Id = tag;
+		}
+
+		public void Unregister(long tag, TagVisualModel viewModel)
+		{
+			viewModels.Remove(tag);
 		}
 	}
 }

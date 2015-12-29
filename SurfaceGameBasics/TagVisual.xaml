@@ -5,7 +5,7 @@
 	xmlns:local="clr-namespace:SurfaceGameBasics"
 	>
 
-    <Grid Width="200" Height="200">
+    <Grid Width="100" Height="100">
 
         <Ellipse Fill="Blue" Opacity="0.4" />
         <Ellipse Fill="Red" Margin="2" />
