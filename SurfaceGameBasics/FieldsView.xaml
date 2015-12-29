@@ -1,0 +1,45 @@
+﻿<Grid
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    x:Class="SurfaceGameBasics.FieldsView"
+    xmlns:local="clr-namespace:SurfaceGameBasics"
+	>
+	<Canvas Width="500" Height="500">
+		<Rectangle Width="500" Height="500" Stroke="Green" StrokeThickness="10" x:Name="rect" />
+
+		<local:Field Canvas.Left="-69" Canvas.Top="-70" x:Name="rectTarget1"/>
+		<local:Field Canvas.Left="421" Canvas.Top="-70" x:Name="rectTarget2"/>
+		<local:Field Canvas.Left="-69" Canvas.Top="420" x:Name="rectTarget3"/>
+		<local:Field Canvas.Left="421" Canvas.Top="420" x:Name="rectTarget4"/>
+	</Canvas>
+	<StackPanel Width="200" Height="200">
+		<s:SurfaceButton Width="110" Height="50" Content="Tag Position" Click="TagPosition_Click"/>
+		<Label x:Name="info"/>
+	</StackPanel>
+
+
+	<s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+		<local:ScatterViewItemFieldObject Width="50" Height="50" Orientation="0.0" x:Name="scatterViewItem1">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<TextBlock Text="ScatterViewItem 1" />
+			</Grid>
+		</local:ScatterViewItemFieldObject>
+
+		<local:ScatterViewItemFieldObject Width="50" Height="50" Orientation="0.0" x:Name="scatterViewItem2">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<TextBlock Text="ScatterViewItem 2" />
+			</Grid>
+		</local:ScatterViewItemFieldObject>
+
+	</s:ScatterView>
+</Grid>

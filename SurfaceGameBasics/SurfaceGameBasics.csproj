@@ -47,10 +47,6 @@
     <ApplicationIcon>ControlsBox.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\LIB\Microsoft.AspNet.SignalR.Client.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Surface">
       <HintPath>..\LIB\Microsoft.Surface.dll</HintPath>
     </Reference>
@@ -61,10 +57,6 @@
       <HintPath>..\LIB\Microsoft.Surface.Presentation.Generic.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\LIB\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xaml" />
     <Reference Include="UIAutomationProvider">
@@ -85,7 +77,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="FieldScatterView.xaml">
+    <Page Include="Field.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FieldsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -101,9 +97,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FieldScatterView.xaml.cs">
-      <DependentUpon>FieldScatterView.xaml</DependentUpon>
+    <Compile Include="Field.xaml.cs">
+      <DependentUpon>Field.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FieldsView.xaml.cs">
+      <DependentUpon>FieldsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScatterViewItemFieldObject.cs" />
     <Compile Include="TagManagement.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="Window1.xaml.cs">

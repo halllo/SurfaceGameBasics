@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AspNet.SignalR.Client">
-      <HintPath>..\LIB\Microsoft.AspNet.SignalR.Client.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Surface">
       <HintPath>..\LIB\Microsoft.Surface.dll</HintPath>
     </Reference>
@@ -55,9 +52,6 @@
     </Reference>
     <Reference Include="Microsoft.Surface.Presentation.Generic">
       <HintPath>..\LIB\Microsoft.Surface.Presentation.Generic.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\LIB\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -79,8 +73,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\SurfaceGameBasics\FieldScatterView.xaml">
-      <Link>FieldScatterView.xaml</Link>
+    <Page Include="..\SurfaceGameBasics\Field.xaml">
+      <Link>Field.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\SurfaceGameBasics\FieldsView.xaml">
+      <Link>FieldsView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -93,11 +92,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="..\SurfaceGameBasics\FieldScatterView.xaml.cs">
-      <Link>FieldScatterView.xaml.cs</Link>
+    <Compile Include="..\SurfaceGameBasics\Field.xaml.cs">
+      <Link>Field.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\SurfaceGameBasics\FieldsView.xaml.cs">
+      <Link>FieldsView.xaml.cs</Link>
     </Compile>
     <Compile Include="..\SurfaceGameBasics\Properties\Settings.Designer.cs">
       <Link>Properties\Settings.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\SurfaceGameBasics\ScatterViewItemFieldObject.cs">
+      <Link>ScatterViewItemFieldObject.cs</Link>
     </Compile>
     <Compile Include="..\SurfaceGameBasics\TagManagement.cs">
       <Link>TagManagement.cs</Link>

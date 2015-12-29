@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:SurfaceGameBasics"
         Title="SurfaceGameBasics.Test" Height="800" Width="1024">
 
-    <Grid Background="Transparent">
+    <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -24,7 +24,7 @@
             </TextBlock>
         </Grid>
 
-        <local:FieldScatterView Grid.Column="1"/>
+        <local:FieldsView Grid.Column="1"/>
 		
     </Grid>
 </Window>

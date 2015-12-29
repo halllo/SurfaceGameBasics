@@ -3,9 +3,11 @@ using System.Windows;
 
 namespace SurfaceGameBasics
 {
-	public partial class TagVisual
+	public partial class TagVisual : Field.IFieldObject
 	{
 		public TagVisualModel ViewModel { get; private set; }
+
+		public Point Position { get { return Center; } }
 
 		public TagVisual()
 		{
@@ -31,7 +33,6 @@ namespace SurfaceGameBasics
 		}
 
 		public TagVisual View { get; set; }
-		public Point Position { get { return View.Center; } }
 
 		public long Id { get; set; }
 	}

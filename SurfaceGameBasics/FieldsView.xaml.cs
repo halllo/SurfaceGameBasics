@@ -3,51 +3,50 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace SurfaceGameBasics
 {
-	public partial class FieldScatterView
+	public partial class FieldsView
 	{
-		public FieldScatterView()
+		public FieldsView()
 		{
 			InitializeComponent();
 
 			var centerDp = DependencyPropertyDescriptor.FromProperty(ScatterViewItem.CenterProperty, typeof(ScatterViewItem));
 			centerDp.AddValueChanged(scatterViewItem1, delegate
 			{
-				CheckPositioning(rectTarget1, scatterViewItem1.Center);
-				CheckPositioning(rectTarget2, scatterViewItem1.Center);
-				CheckPositioning(rectTarget3, scatterViewItem1.Center);
-				CheckPositioning(rectTarget4, scatterViewItem1.Center);
+				CheckPositioning(rectTarget1, scatterViewItem1);
+				CheckPositioning(rectTarget2, scatterViewItem1);
+				CheckPositioning(rectTarget3, scatterViewItem1);
+				CheckPositioning(rectTarget4, scatterViewItem1);
 			});
 			centerDp.AddValueChanged(scatterViewItem2, delegate
 			{
-				CheckPositioning(rectTarget1, scatterViewItem2.Center);
-				CheckPositioning(rectTarget2, scatterViewItem2.Center);
-				CheckPositioning(rectTarget3, scatterViewItem2.Center);
-				CheckPositioning(rectTarget4, scatterViewItem2.Center);
+				CheckPositioning(rectTarget1, scatterViewItem2);
+				CheckPositioning(rectTarget2, scatterViewItem2);
+				CheckPositioning(rectTarget3, scatterViewItem2);
+				CheckPositioning(rectTarget4, scatterViewItem2);
 			});
 		}
 
-		private void CheckPositioning(Rectangle targetRectangle, Point itemCenter)
+		private void CheckPositioning(Field targetRectangle, Field.IFieldObject item)
 		{
 			var target = GetTargetCenter(targetRectangle);
 
+			var itemCenter = item.Position;
 			var centerDifference = target - new Vector(itemCenter.X, itemCenter.Y);
 			var centerDifferenceTolerance = targetRectangle.ActualWidth / 2.0;
 			if (centerDifference.LengthSquared < centerDifferenceTolerance * centerDifferenceTolerance)
 			{
-				targetRectangle.Fill = Brushes.Blue;
+				targetRectangle.Enter(item);
 			}
 			else
 			{
-				targetRectangle.Fill = null;
+				targetRectangle.Leave(item);
 			}
 		}
 
-		private Vector GetTargetCenter(Rectangle target)
+		private Vector GetTargetCenter(Field target)
 		{
 			var containerSize = new Vector(ActualWidth, ActualHeight);
 			var borderSize = new Vector(rect.ActualWidth, rect.ActualHeight);
@@ -69,12 +68,12 @@ namespace SurfaceGameBasics
 
 			foreach (var tag in tags)
 			{
-				var tagPosition = tag.Position;
+				var tagPosition = tag.View.Position;
 				infoText += "\n" + tag.Id + ": position(" + tagPosition.X + ", " + tagPosition.Y + ")";
-				CheckPositioning(rectTarget1, tagPosition);
-				CheckPositioning(rectTarget2, tagPosition);
-				CheckPositioning(rectTarget3, tagPosition);
-				CheckPositioning(rectTarget4, tagPosition);
+				CheckPositioning(rectTarget1, tag.View);
+				CheckPositioning(rectTarget2, tag.View);
+				CheckPositioning(rectTarget3, tag.View);
+				CheckPositioning(rectTarget4, tag.View);
 			}
 
 			info.Content = infoText;

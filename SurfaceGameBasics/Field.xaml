@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="SurfaceGameBasics.Field"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SurfaceGameBasics"
+             Height="150" Width="150">
+	<Border BorderBrush="Red" BorderThickness="10">
+		<Grid>
+
+		</Grid>
+	</Border>
+</UserControl>

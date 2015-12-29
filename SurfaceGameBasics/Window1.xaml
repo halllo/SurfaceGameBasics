@@ -33,7 +33,7 @@
                     <s:TagVisualizationDefinition Value="0x03" TagRemovedBehavior="Fade" Source="TagVisual.xaml"/>
                 </s:TagVisualizer.Definitions>
 
-                <local:FieldScatterView/>
+                <local:FieldsView/>
 
             </s:TagVisualizer>
         </Grid>
