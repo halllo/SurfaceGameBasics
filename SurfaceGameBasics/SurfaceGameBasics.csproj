@@ -77,11 +77,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Field.xaml">
+    <Page Include="ExampleField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FieldsView.xaml">
+    <Page Include="ExampleFieldsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -97,12 +97,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Field.xaml.cs">
-      <DependentUpon>Field.xaml</DependentUpon>
+    <Compile Include="ExampleField.xaml.cs">
+      <DependentUpon>ExampleField.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FieldsView.xaml.cs">
-      <DependentUpon>FieldsView.xaml</DependentUpon>
+    <Compile Include="ExampleFieldsView.xaml.cs">
+      <DependentUpon>ExampleFieldsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FieldsView.cs" />
     <Compile Include="ScatterViewItemFieldObject.cs" />
     <Compile Include="TagManagement.cs" />
     <Compile Include="ViewModel.cs" />

@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace SurfaceGameBasics
 {
-	public partial class TagVisual : Field.IFieldObject
+	public partial class TagVisual : IFieldOccupant
 	{
 		public TagVisualModel ViewModel { get; private set; }
 

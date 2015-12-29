@@ -1,0 +1,25 @@
+﻿<local:FieldsView
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    x:Class="SurfaceGameBasics.ExampleFieldsView"
+    xmlns:local="clr-namespace:SurfaceGameBasics">
+
+	<Canvas Width="500" Height="500" x:Name="fieldsContainer">
+		<Rectangle Width="500" Height="500" Stroke="Green" StrokeThickness="10" />
+		<local:ExampleField Canvas.Left="-69" Canvas.Top="-70" x:Name="field1"/>
+		<local:ExampleField Canvas.Left="421" Canvas.Top="-70" x:Name="field2"/>
+		<local:ExampleField Canvas.Left="-69" Canvas.Top="420" x:Name="field3"/>
+		<local:ExampleField Canvas.Left="421" Canvas.Top="420" x:Name="field4"/>
+	</Canvas>
+
+	<s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+		<local:ScatterViewItemFieldObject Width="50" Height="50" Orientation="0.0" x:Name="scatterViewItem1">
+			<TextBlock Text="ScatterViewItem 1" />
+		</local:ScatterViewItemFieldObject>
+		<local:ScatterViewItemFieldObject Width="50" Height="50" Orientation="0.0" x:Name="scatterViewItem2">
+			<TextBlock Text="ScatterViewItem 2" />
+		</local:ScatterViewItemFieldObject>
+	</s:ScatterView>
+
+</local:FieldsView>

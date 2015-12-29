@@ -24,7 +24,7 @@
             </TextBlock>
         </Grid>
 
-        <local:FieldsView Grid.Column="1"/>
+        <local:ExampleFieldsView Grid.Column="1"/>
 		
     </Grid>
 </Window>

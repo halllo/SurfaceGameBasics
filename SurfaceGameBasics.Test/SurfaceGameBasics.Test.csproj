@@ -73,13 +73,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\SurfaceGameBasics\Field.xaml">
-      <Link>Field.xaml</Link>
+    <Page Include="..\SurfaceGameBasics\ExampleField.xaml">
+      <Link>ExampleField.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\SurfaceGameBasics\FieldsView.xaml">
-      <Link>FieldsView.xaml</Link>
+    <Page Include="..\SurfaceGameBasics\ExampleFieldsView.xaml">
+      <Link>ExampleFieldsView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -92,11 +92,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="..\SurfaceGameBasics\Field.xaml.cs">
-      <Link>Field.xaml.cs</Link>
+    <Compile Include="..\SurfaceGameBasics\ExampleField.xaml.cs">
+      <Link>ExampleField.xaml.cs</Link>
     </Compile>
-    <Compile Include="..\SurfaceGameBasics\FieldsView.xaml.cs">
-      <Link>FieldsView.xaml.cs</Link>
+    <Compile Include="..\SurfaceGameBasics\ExampleFieldsView.xaml.cs">
+      <Link>ExampleFieldsView.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\SurfaceGameBasics\FieldsView.cs">
+      <Link>FieldsView.cs</Link>
     </Compile>
     <Compile Include="..\SurfaceGameBasics\Properties\Settings.Designer.cs">
       <Link>Properties\Settings.Designer.cs</Link>
