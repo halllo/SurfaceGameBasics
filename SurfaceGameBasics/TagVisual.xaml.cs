@@ -13,7 +13,7 @@ namespace SurfaceGameBasics
 		{
 			InitializeComponent();
 
-			DataContext = ViewModel = new TagVisualModel { View = this };
+			DataContext = ViewModel = new TagVisualModel { Visual = this };
 
 			Loaded += (s, e) => ViewModel.TagAvailable(VisualizedTag);
 			Unloaded += (s, e) => ViewModel.TagUnavailable(VisualizedTag);
@@ -32,7 +32,7 @@ namespace SurfaceGameBasics
 			TagManagement.Instance.Value.Unregister(tag.Value, this);
 		}
 
-		public TagVisual View { get; set; }
+		public TagVisual Visual { get; set; }
 
 		public long Id { get; set; }
 	}

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,9 +10,7 @@ namespace SurfaceGameBasics
 {
 	public partial class ExampleField : UserControl, IField
 	{
-		HashSet<IFieldOccupant> _fieldOccupants = new HashSet<IFieldOccupant>();
-		Vector _globalPosition;
-		double _globalPositionDifferenceToleranceSquared;
+		ConcurrentDictionary<IFieldOccupant, byte> _fieldOccupants = new ConcurrentDictionary<IFieldOccupant, byte>();
 
 		public ExampleField()
 		{
@@ -19,41 +19,35 @@ namespace SurfaceGameBasics
 
 		public Point Position { get { return new Point((double)GetValue(Canvas.LeftProperty), (double)GetValue(Canvas.TopProperty)); } }
 		public Vector Size { get { return new Vector(ActualWidth, ActualHeight); } }
+		public ReadOnlyCollection<IFieldOccupant> Occupants { get { return _fieldOccupants.Keys.ToList().AsReadOnly(); } }
 
-		public void Activate(Vector globalPosition)
+		public event Action<IFieldOccupant> Occupied;
+		private void RaiseOccupied(IFieldOccupant occupant)
 		{
-			_globalPosition = globalPosition;
-
-			var globalPositionDifferenceTolerance = base.ActualWidth / 2.0;
-			_globalPositionDifferenceToleranceSquared = globalPositionDifferenceTolerance * globalPositionDifferenceTolerance;
+			var h = Occupied;
+			if (h != null) h(occupant);
 		}
 
-		public void HandlePositioning(IFieldOccupant occupant)
+		public event Action<IFieldOccupant> Yielded;
+		private void RaiseYielded(IFieldOccupant occupant)
 		{
-			var itemCenter = occupant.Position;
-			var centerDifference = _globalPosition - new Vector(itemCenter.X, itemCenter.Y);
-			var centerDifferenceLengthSquared = centerDifference.LengthSquared;
-
-			if (centerDifferenceLengthSquared < _globalPositionDifferenceToleranceSquared)
-			{
-				Occupy(occupant);
-			}
-			else
-			{
-				Leave(occupant);
-			}
+			var h = Yielded;
+			if (h != null) h(occupant);
 		}
 
-		private void Occupy(IFieldOccupant occupant)
+		public void Occupy(IFieldOccupant occupant)
 		{
-			_fieldOccupants.Add(occupant);
+			_fieldOccupants.TryAdd(occupant, byte.MinValue);
 			UpdateState();
+			RaiseOccupied(occupant);
 		}
 
-		private void Leave(IFieldOccupant occupant)
+		public void Yield(IFieldOccupant occupant)
 		{
-			_fieldOccupants.Remove(occupant);
+			var value = byte.MinValue;
+			_fieldOccupants.TryRemove(occupant, out value);
 			UpdateState();
+			RaiseYielded(occupant);
 		}
 
 		private void UpdateState()

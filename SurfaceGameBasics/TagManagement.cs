@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Media;
 
 namespace SurfaceGameBasics
@@ -16,19 +15,27 @@ namespace SurfaceGameBasics
 		public readonly static Lazy<TagManagement> Instance = new Lazy<TagManagement>(() => new TagManagement());
 
 
-		Dictionary<long, TagVisualModel> viewModels = new Dictionary<long, TagVisualModel>();
-		public IEnumerable<TagVisualModel> All { get { return viewModels.Values; } }
-
-
+		public event Action<TagVisualModel> TagRegistered;
+		private void RaiseTagRegistered(TagVisualModel tag)
+		{
+			var h = TagRegistered;
+			if (h != null) h(tag);
+		}
 		public void Register(long tag, TagVisualModel viewModel)
 		{
-			viewModels[tag] = viewModel;
-			viewModel.Id = tag;
+			RaiseTagRegistered(viewModel);
 		}
 
+
+		public event Action<TagVisualModel> TagUnregistered;
+		private void RaiseTagUnregistered(TagVisualModel tag)
+		{
+			var h = TagUnregistered;
+			if (h != null) h(tag);
+		}
 		public void Unregister(long tag, TagVisualModel viewModel)
 		{
-			viewModels.Remove(tag);
+			RaiseTagUnregistered(viewModel);
 		}
 	}
 }

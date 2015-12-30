@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -8,13 +9,13 @@ namespace SurfaceGameBasics
 {
 	public class FieldsView : Grid
 	{
-		HashSet<IField> _fields = new HashSet<IField>();
-		HashSet<IFieldOccupant> _occupants = new HashSet<IFieldOccupant>();
 		FrameworkElement _fieldsContainer;
+		ConcurrentDictionary<IField, FieldPositioning> _fields = new ConcurrentDictionary<IField, FieldPositioning>();
+		ConcurrentDictionary<IFieldOccupant, byte> _occupants = new ConcurrentDictionary<IFieldOccupant, byte>();
 
 		public FieldsView()
 		{
-			Loaded += FieldsView_Loaded;
+			Loaded += StartBackgroundPositioning;
 		}
 
 		public void Register(FrameworkElement fieldsContainer)
@@ -26,8 +27,14 @@ namespace SurfaceGameBasics
 		{
 			foreach (var field in fields)
 			{
-				_fields.Add(field);
-				field.Activate(globalPosition: GetCenter(field));
+				var globalPosition = GetCenter(field);
+				var globalPositionDifferenceTolerance = field.Size.X / 2.0;
+
+				_fields.TryAdd(field, new FieldPositioning());
+
+				var fieldPositioning = _fields[field];
+				fieldPositioning.GlobalPosition = globalPosition;
+				fieldPositioning.GlobalPositionDifferenceToleranceSquared = globalPositionDifferenceTolerance * globalPositionDifferenceTolerance;
 			}
 		}
 
@@ -35,7 +42,8 @@ namespace SurfaceGameBasics
 		{
 			foreach (var field in fields)
 			{
-				_fields.Remove(field);
+				FieldPositioning value;
+				_fields.TryRemove(field, out value);
 			}
 		}
 
@@ -43,7 +51,7 @@ namespace SurfaceGameBasics
 		{
 			foreach (var occupant in occupants)
 			{
-				_occupants.Add(occupant);
+				_occupants.TryAdd(occupant, byte.MinValue);
 			}
 		}
 
@@ -51,22 +59,31 @@ namespace SurfaceGameBasics
 		{
 			foreach (var occupant in occupants)
 			{
-				_occupants.Remove(occupant);
+				var value = byte.MinValue;
+				_occupants.TryRemove(occupant, out value);
 			}
 		}
 
-		private void FieldsView_Loaded(object sender, RoutedEventArgs e)
+		private void StartBackgroundPositioning(object sender, RoutedEventArgs e)
 		{
 			var timer = new DispatcherTimer(DispatcherPriority.Background);
 			timer.Interval = TimeSpan.FromSeconds(1);
 			timer.Tick += (s, e2) =>
 			{
 				timer.Stop();
-				foreach (var occupant in _occupants)
+				foreach (var occupant in _occupants.Keys)
 				{
 					foreach (var field in _fields)
 					{
-						field.HandlePositioning(occupant);
+						var centerDifference = field.Value.GlobalPosition - occupant.Position.AsVector();
+						if (centerDifference.LengthSquared < field.Value.GlobalPositionDifferenceToleranceSquared)
+						{
+							field.Key.Occupy(occupant);
+						}
+						else
+						{
+							field.Key.Yield(occupant);
+						}
 					}
 				}
 				timer.Start();
@@ -77,10 +94,10 @@ namespace SurfaceGameBasics
 		private Vector GetCenter(IField field)
 		{
 			var containerSize = new Vector(ActualWidth, ActualHeight);
-			var mainfieldSize = new Vector(_fieldsContainer.ActualWidth, _fieldsContainer.ActualHeight);
-			var mainfieldTopRight = (containerSize - mainfieldSize) / 2.0;
+			var fieldsContainerSize = new Vector(_fieldsContainer.ActualWidth, _fieldsContainer.ActualHeight);
+			var fieldsContainerTopRight = (containerSize - fieldsContainerSize) / 2.0;
 
-			var fieldTopRight = mainfieldTopRight + field.Position.AsVector();
+			var fieldTopRight = fieldsContainerTopRight + field.Position.AsVector();
 			var fieldCenter = fieldTopRight + field.Size / 2.0;
 
 			return fieldCenter;
@@ -95,12 +112,23 @@ namespace SurfaceGameBasics
 		}
 	}
 
+	public class FieldPositioning
+	{
+		public Vector GlobalPosition { get; set; }
+		public double GlobalPositionDifferenceToleranceSquared { get; set; }
+	}
+
 	public interface IField
 	{
 		Point Position { get; }
 		Vector Size { get; }
-		void Activate(Vector globalPosition);
-		void HandlePositioning(IFieldOccupant occupant);
+		ReadOnlyCollection<IFieldOccupant> Occupants { get; }
+
+		void Occupy(IFieldOccupant occupant);
+		event Action<IFieldOccupant> Occupied;
+
+		void Yield(IFieldOccupant occupant);
+		event Action<IFieldOccupant> Yielded;
 	}
 
 	public interface IFieldOccupant
