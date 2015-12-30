@@ -7,18 +7,18 @@
 
 	<Canvas Width="500" Height="500" x:Name="fieldsContainer">
 		<Rectangle Width="500" Height="500" Stroke="Green" StrokeThickness="10" />
-		<local:ExampleField Canvas.Left="-69" Canvas.Top="-70" x:Name="field1"/>
-		<local:ExampleField Canvas.Left="421" Canvas.Top="-70" x:Name="field2"/>
-		<local:ExampleField Canvas.Left="-69" Canvas.Top="420" x:Name="field3"/>
-		<local:ExampleField Canvas.Left="421" Canvas.Top="420" x:Name="field4"/>
+		<local:ExampleField Canvas.Left="-69" Canvas.Top="-70" Text="1" Tag="1" x:Name="field1"/>
+		<local:ExampleField Canvas.Left="421" Canvas.Top="-70" Text="2" Tag="2" x:Name="field2"/>
+		<local:ExampleField Canvas.Left="-69" Canvas.Top="420" Text="3" Tag="3" x:Name="field3"/>
+		<local:ExampleField Canvas.Left="421" Canvas.Top="420" Text="4" Tag="4" x:Name="field4"/>
 	</Canvas>
 
 	<s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-		<local:ScatterViewItemFieldObject Width="50" Height="50" Orientation="0.0" x:Name="scatterViewItem1">
-			<TextBlock Text="ScatterViewItem 1" />
+		<local:ScatterViewItemFieldObject Width="50" Height="50" Orientation="0.0" Background="Lime" x:Name="scatterViewItem1" Tag="1">
+			<TextBlock Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
 		</local:ScatterViewItemFieldObject>
-		<local:ScatterViewItemFieldObject Width="50" Height="50" Orientation="0.0" x:Name="scatterViewItem2">
-			<TextBlock Text="ScatterViewItem 2" />
+		<local:ScatterViewItemFieldObject Width="50" Height="50" Orientation="0.0" Background="Magenta" x:Name="scatterViewItem2" Tag="2">
+			<TextBlock Text="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
 		</local:ScatterViewItemFieldObject>
 	</s:ScatterView>
 

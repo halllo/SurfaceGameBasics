@@ -5,9 +5,15 @@ namespace SurfaceGameBasics
 {
 	public partial class TagVisual : IFieldOccupant
 	{
-		public TagVisualModel ViewModel { get; private set; }
-
 		public Point Position { get { return Center; } }
+
+		string IFieldOccupant.Tag
+		{
+			get { return Tag.ToString(); }
+			set { Tag = value; }
+		}
+
+		public TagVisualModel ViewModel { get; private set; }
 
 		public TagVisual()
 		{

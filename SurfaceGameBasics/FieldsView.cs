@@ -10,7 +10,7 @@ namespace SurfaceGameBasics
 	public class FieldsView : Grid
 	{
 		FrameworkElement _fieldsContainer;
-		ConcurrentDictionary<IField, FieldPositioning> _fields = new ConcurrentDictionary<IField, FieldPositioning>();
+		ConcurrentDictionary<IField, FieldPosition> _fields = new ConcurrentDictionary<IField, FieldPosition>();
 		ConcurrentDictionary<IFieldOccupant, byte> _occupants = new ConcurrentDictionary<IFieldOccupant, byte>();
 
 		public FieldsView()
@@ -30,7 +30,7 @@ namespace SurfaceGameBasics
 				var globalPosition = GetCenter(field);
 				var globalPositionDifferenceTolerance = field.Size.X / 2.0;
 
-				_fields.TryAdd(field, new FieldPositioning());
+				_fields.TryAdd(field, new FieldPosition());
 
 				var fieldPositioning = _fields[field];
 				fieldPositioning.GlobalPosition = globalPosition;
@@ -42,7 +42,7 @@ namespace SurfaceGameBasics
 		{
 			foreach (var field in fields)
 			{
-				FieldPositioning value;
+				FieldPosition value;
 				_fields.TryRemove(field, out value);
 			}
 		}
@@ -75,8 +75,7 @@ namespace SurfaceGameBasics
 				{
 					foreach (var field in _fields)
 					{
-						var centerDifference = field.Value.GlobalPosition - occupant.Position.AsVector();
-						if (centerDifference.LengthSquared < field.Value.GlobalPositionDifferenceToleranceSquared)
+						if (field.Value.Contains(occupant.Position.AsVector()))
 						{
 							field.Key.Occupy(occupant);
 						}
@@ -112,14 +111,21 @@ namespace SurfaceGameBasics
 		}
 	}
 
-	public class FieldPositioning
+	public class FieldPosition
 	{
 		public Vector GlobalPosition { get; set; }
 		public double GlobalPositionDifferenceToleranceSquared { get; set; }
+
+		public bool Contains(Vector position)
+		{
+			var centerDifference = GlobalPosition - position;
+			return centerDifference.LengthSquared < GlobalPositionDifferenceToleranceSquared;
+		}
 	}
 
 	public interface IField
 	{
+		string Tag { get; set; }
 		Point Position { get; }
 		Vector Size { get; }
 		ReadOnlyCollection<IFieldOccupant> Occupants { get; }
@@ -133,6 +139,7 @@ namespace SurfaceGameBasics
 
 	public interface IFieldOccupant
 	{
+		string Tag { get; set; }
 		Point Position { get; }
 	}
 }

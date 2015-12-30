@@ -17,22 +17,28 @@ namespace SurfaceGameBasics
 			InitializeComponent();
 		}
 
+		public string Text
+		{
+			get { return FieldText.Text; }
+			set { FieldText.Text = value; }
+		}
+
+		public string StateText
+		{
+			get { return FieldStateText.Text; }
+			set { FieldStateText.Text = value; }
+		}
+
+
+
 		public Point Position { get { return new Point((double)GetValue(Canvas.LeftProperty), (double)GetValue(Canvas.TopProperty)); } }
 		public Vector Size { get { return new Vector(ActualWidth, ActualHeight); } }
 		public ReadOnlyCollection<IFieldOccupant> Occupants { get { return _fieldOccupants.Keys.ToList().AsReadOnly(); } }
 
-		public event Action<IFieldOccupant> Occupied;
-		private void RaiseOccupied(IFieldOccupant occupant)
+		string IField.Tag
 		{
-			var h = Occupied;
-			if (h != null) h(occupant);
-		}
-
-		public event Action<IFieldOccupant> Yielded;
-		private void RaiseYielded(IFieldOccupant occupant)
-		{
-			var h = Yielded;
-			if (h != null) h(occupant);
+			get { return Tag.ToString(); }
+			set { Tag = value; }
 		}
 
 		public void Occupy(IFieldOccupant occupant)
@@ -40,6 +46,12 @@ namespace SurfaceGameBasics
 			_fieldOccupants.TryAdd(occupant, byte.MinValue);
 			UpdateState();
 			RaiseOccupied(occupant);
+		}
+		public event Action<IFieldOccupant> Occupied;
+		private void RaiseOccupied(IFieldOccupant occupant)
+		{
+			var h = Occupied;
+			if (h != null) h(occupant);
 		}
 
 		public void Yield(IFieldOccupant occupant)
@@ -49,17 +61,26 @@ namespace SurfaceGameBasics
 			UpdateState();
 			RaiseYielded(occupant);
 		}
+		public event Action<IFieldOccupant> Yielded;
+		private void RaiseYielded(IFieldOccupant occupant)
+		{
+			var h = Yielded;
+			if (h != null) h(occupant);
+		}
+
 
 		private void UpdateState()
 		{
 			if (_fieldOccupants.Any())
 			{
-				Background = Brushes.Green;
+				Border.BorderBrush = Brushes.Green;
 			}
 			else
 			{
-				Background = null;
+				Border.BorderBrush = Brushes.Red;
 			}
+
+			StateText = _fieldOccupants.Count + " occupants";
 		}
 	}
 }
