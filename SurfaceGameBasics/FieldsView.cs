@@ -12,6 +12,7 @@ namespace SurfaceGameBasics
 		FrameworkElement _fieldsContainer;
 		ConcurrentDictionary<IField, FieldPosition> _fields = new ConcurrentDictionary<IField, FieldPosition>();
 		ConcurrentDictionary<IFieldOccupant, byte> _occupants = new ConcurrentDictionary<IFieldOccupant, byte>();
+		ConcurrentDictionary<IFieldOccupant, byte> _untrackedOccupants = new ConcurrentDictionary<IFieldOccupant, byte>();
 
 		public FieldsView()
 		{
@@ -61,6 +62,7 @@ namespace SurfaceGameBasics
 			{
 				var value = byte.MinValue;
 				_occupants.TryRemove(occupant, out value);
+				_untrackedOccupants.TryAdd(occupant, byte.MinValue);
 			}
 		}
 
@@ -83,6 +85,15 @@ namespace SurfaceGameBasics
 						{
 							field.Key.Yield(occupant);
 						}
+					}
+				}
+				foreach (var untrackedOccupant in _untrackedOccupants.Keys)
+				{
+					foreach (var field in _fields.Keys)
+					{
+						field.Yield(untrackedOccupant);
+						byte value;
+						_untrackedOccupants.TryRemove(untrackedOccupant, out value);
 					}
 				}
 				timer.Start();

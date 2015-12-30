@@ -30,8 +30,12 @@ namespace SurfaceGameBasics.Test
 				Content = new TestTagVisual(),
 			};
 
-			var tagVisual = testTag.Content as TagVisual;
-			tagVisual.Loaded += (s2, e2) => tagVisual.ViewModel.TagAvailable(new Microsoft.Surface.Presentation.Input.TagData(0, 0, 0, long.Parse(testTag.Tag.ToString())));
+			var tagVisual = testTag.Content as TestTagVisual;
+			tagVisual.Loaded += (s2, e2) =>
+			{
+				tagVisual.ViewModel.TagAvailable(new Microsoft.Surface.Presentation.Input.TagData(0, 0, 0, long.Parse(testTag.Tag.ToString())));
+				tagVisual.ViewModel.TagUnavailable();
+			};
 
 			return testTag;
 		}
