@@ -93,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AllTagsVisualizationDefinition.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -106,6 +107,7 @@
     <Compile Include="FieldsView.cs" />
     <Compile Include="ScatterViewItemFieldObject.cs" />
     <Compile Include="TagManagement.cs" />
+    <Compile Include="TextOnAPath.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>

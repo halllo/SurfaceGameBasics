@@ -28,10 +28,8 @@
         <Grid Grid.Column="1">
             <s:TagVisualizer Name="Visualizer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                 <s:TagVisualizer.Definitions>
-                    <s:TagVisualizationDefinition Value="0x01" TagRemovedBehavior="Fade" Source="TagVisual.xaml"/>
-                    <s:TagVisualizationDefinition Value="0x02" TagRemovedBehavior="Fade" Source="TagVisual.xaml"/>
-                    <s:TagVisualizationDefinition Value="0x03" TagRemovedBehavior="Fade" Source="TagVisual.xaml"/>
-                </s:TagVisualizer.Definitions>
+					<local:AllTagsVisualizationDefinition TagRemovedBehavior="Fade" Source="TagVisual.xaml"/>
+				</s:TagVisualizer.Definitions>
 
                 <local:FieldsView/>
 

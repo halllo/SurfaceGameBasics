@@ -1,16 +1,17 @@
 ﻿using Microsoft.Surface.Presentation.Input;
+using System;
 using System.Windows;
 
 namespace SurfaceGameBasics
 {
 	public partial class TagVisual : IFieldOccupant
 	{
-		public Point Position { get { return Center; } }
+		public virtual Point Position { get { return Center; } }
 
 		string IFieldOccupant.Tag
 		{
-			get { return Tag.ToString(); }
-			set { Tag = value; }
+			get { return ViewModel.Id.ToString(); }
+			set { throw new NotSupportedException(); }
 		}
 
 		public TagVisualModel ViewModel { get; private set; }
@@ -22,7 +23,7 @@ namespace SurfaceGameBasics
 			DataContext = ViewModel = new TagVisualModel { Visual = this };
 
 			Loaded += (s, e) => ViewModel.TagAvailable(VisualizedTag);
-			Unloaded += (s, e) => ViewModel.TagUnavailable(VisualizedTag);
+			Unloaded += (s, e) => ViewModel.TagUnavailable();
 		}
 	}
 
@@ -30,16 +31,19 @@ namespace SurfaceGameBasics
 	{
 		public void TagAvailable(TagData tag)
 		{
-			TagManagement.Instance.Value.Register(tag.Value, this);
+			Id = tag.Value;
+			NotifyChanged("Id");
+
+			TagManagement.Instance.Value.Register(Id, this);
 		}
 
-		internal void TagUnavailable(TagData tag)
+		internal void TagUnavailable()
 		{
-			TagManagement.Instance.Value.Unregister(tag.Value, this);
+			TagManagement.Instance.Value.Unregister(Id, this);
 		}
 
-		public TagVisual Visual { get; set; }
 
-		public long Id { get; set; }
+		public long Id { get; private set; }
+		public TagVisual Visual { get; set; }
 	}
 }

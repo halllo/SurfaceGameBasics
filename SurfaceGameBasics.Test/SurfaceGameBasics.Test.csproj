@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TestTagVisual.cs" />
     <Page Include="..\SurfaceGameBasics\ExampleField.xaml">
       <Link>ExampleField.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +113,9 @@
     </Compile>
     <Compile Include="..\SurfaceGameBasics\TagVisual.xaml.cs">
       <Link>TagVisual.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\SurfaceGameBasics\TextOnAPath.cs">
+      <Link>TextOnAPath.cs</Link>
     </Compile>
     <Compile Include="..\SurfaceGameBasics\ViewModel.cs">
       <Link>ViewModel.cs</Link>

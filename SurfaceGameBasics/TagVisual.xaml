@@ -7,9 +7,27 @@
 
     <Grid Width="100" Height="100">
 
-        <Ellipse Fill="Blue" Opacity="0.4" />
-        <Ellipse Fill="Red" Margin="2" />
+        <Ellipse Fill="DarkOrange" Opacity="0.4" />
+        <Ellipse Fill="Orange" Margin="2" />
 
-    </Grid>
+		<local:TextOnAPath Text="{Binding Id,Mode=OneWay,StringFormat=Tag {0}}" FontSize="15" Foreground="Orange" Margin="-15" DrawPath="False">
+			<local:TextOnAPath.RenderTransform>
+				<RotateTransform CenterX="65" CenterY="65" Angle="90"/>
+			</local:TextOnAPath.RenderTransform>
+			<local:TextOnAPath.TextPath>
+				<EllipseGeometry RadiusX="50" RadiusY="50"/>
+			</local:TextOnAPath.TextPath>
+		</local:TextOnAPath>
+
+		<local:TextOnAPath Text="Token" Inverted="True" FontSize="15" Foreground="White" Margin="-15" DrawPath="True">
+			<local:TextOnAPath.RenderTransform>
+				<RotateTransform CenterX="65" CenterY="65" Angle="-90"/>
+			</local:TextOnAPath.RenderTransform>
+			<local:TextOnAPath.TextPath>
+				<EllipseGeometry RadiusX="50" RadiusY="50"/>
+			</local:TextOnAPath.TextPath>
+		</local:TextOnAPath>
+
+	</Grid>
 	
 </s:TagVisualization>
