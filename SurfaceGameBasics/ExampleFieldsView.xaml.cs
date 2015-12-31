@@ -12,6 +12,8 @@
 
 		private void Setup(object sender, System.Windows.RoutedEventArgs e)
 		{
+			centerText.Text = "(" + ActualWidth + ", " + ActualHeight + ")";
+
 			Register(fieldsContainer);
 			Register(field1, field2, field3, field4);
 

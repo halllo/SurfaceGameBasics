@@ -7,6 +7,7 @@ namespace SurfaceGameBasics
 	public partial class TagVisual : IFieldOccupant
 	{
 		public virtual Point Position { get { return Center; } }
+		public virtual double OrientationAngle { get { return Orientation; } }
 
 		string IFieldOccupant.Tag
 		{
@@ -15,6 +16,7 @@ namespace SurfaceGameBasics
 		}
 
 		public TagVisualModel ViewModel { get; private set; }
+
 
 		public TagVisual()
 		{

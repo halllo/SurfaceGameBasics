@@ -15,6 +15,16 @@ namespace SurfaceGameBasics
 		public ExampleField()
 		{
 			InitializeComponent();
+
+			HideArrows();
+		}
+
+		private void HideArrows()
+		{
+			topArrow.Visibility = Visibility.Collapsed;
+			bottomArrow.Visibility = Visibility.Collapsed;
+			leftArrow.Visibility = Visibility.Collapsed;
+			rightArrow.Visibility = Visibility.Collapsed;
 		}
 
 		public string Text
@@ -31,15 +41,17 @@ namespace SurfaceGameBasics
 
 
 
-		public Point Position { get { return new Point((double)GetValue(Canvas.LeftProperty), (double)GetValue(Canvas.TopProperty)); } }
-		public Vector Size { get { return new Vector(ActualWidth, ActualHeight); } }
-		public ReadOnlyCollection<IFieldOccupant> Occupants { get { return _fieldOccupants.Keys.ToList().AsReadOnly(); } }
 
 		string IField.Tag
 		{
 			get { return Tag.ToString(); }
 			set { Tag = value; }
 		}
+		public Point Position { get { return new Point((double)GetValue(Canvas.LeftProperty), (double)GetValue(Canvas.TopProperty)); } }
+		public double OrientationAngle { get { return RenderTransform is RotateTransform ? ((RotateTransform)RenderTransform).Angle : 0; } }
+		public Vector Size { get { return new Vector(ActualWidth, ActualHeight); } }
+		public ReadOnlyCollection<IFieldOccupant> Occupants { get { return _fieldOccupants.Keys.ToList().AsReadOnly(); } }
+
 
 		public void Occupy(IFieldOccupant occupant)
 		{
@@ -71,9 +83,19 @@ namespace SurfaceGameBasics
 
 		private void UpdateState()
 		{
+			HideArrows();
+
 			if (_fieldOccupants.Any())
 			{
 				Border.BorderBrush = Brushes.Green;
+
+				foreach (var occupant in _fieldOccupants.Keys)
+				{
+					if (occupant.OrientatesTop(this)) topArrow.Visibility = Visibility.Visible;
+					if (occupant.OrientatesBottom(this)) bottomArrow.Visibility = Visibility.Visible;
+					if (occupant.OrientatesRight(this)) rightArrow.Visibility = Visibility.Visible;
+					if (occupant.OrientatesLeft(this)) leftArrow.Visibility = Visibility.Visible;
+				}
 			}
 			else
 			{

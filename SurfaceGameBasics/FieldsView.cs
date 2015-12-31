@@ -122,6 +122,37 @@ namespace SurfaceGameBasics
 		}
 	}
 
+	public static class AngleCalculator
+	{
+		public static bool OrientatesTop(this IFieldOccupant occupant, IField field = null)
+		{
+			var occupantAngle = occupant.OrientationAngle - (field != null ? field.OrientationAngle : 0);
+			return occupantAngle.Between(leftBound: 360 - 45, rightBound: 360)
+				|| occupantAngle.Between(leftBound: 0, rightBound: 0 + 45);
+		}
+		public static bool OrientatesBottom(this IFieldOccupant occupant, IField field = null)
+		{
+			var occupantAngle = occupant.OrientationAngle - (field != null ? field.OrientationAngle : 0);
+			return occupantAngle.Between(leftBound: 180 - 45, rightBound: 180 + 45);
+		}
+		public static bool OrientatesRight(this IFieldOccupant occupant, IField field = null)
+		{
+			var occupantAngle = occupant.OrientationAngle - (field != null ? field.OrientationAngle : 0);
+			return occupantAngle.Between(leftBound: 90 - 45, rightBound: 90 + 45);
+		}
+		public static bool OrientatesLeft(this IFieldOccupant occupant, IField field = null)
+		{
+			var occupantAngle = occupant.OrientationAngle - (field != null ? field.OrientationAngle : 0);
+			return occupantAngle.Between(leftBound: 270 - 45, rightBound: 270 + 45);
+		}
+
+		private static bool Between(this double angle, double leftBound, double rightBound)
+		{
+			angle = (angle + 360) % 360;
+			return leftBound <= angle && angle < rightBound;
+		}
+	}
+
 	public class FieldPosition
 	{
 		public Vector GlobalPosition { get; set; }
@@ -138,6 +169,7 @@ namespace SurfaceGameBasics
 	{
 		string Tag { get; set; }
 		Point Position { get; }
+		double OrientationAngle { get; }
 		Vector Size { get; }
 		ReadOnlyCollection<IFieldOccupant> Occupants { get; }
 
@@ -152,5 +184,6 @@ namespace SurfaceGameBasics
 	{
 		string Tag { get; set; }
 		Point Position { get; }
+		double OrientationAngle { get; }
 	}
 }

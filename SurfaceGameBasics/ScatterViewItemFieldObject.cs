@@ -6,6 +6,7 @@ namespace SurfaceGameBasics
 	public class ScatterViewItemFieldObject : ScatterViewItem, IFieldOccupant
 	{
 		public Point Position { get { return Center; } }
+		public double OrientationAngle { get { return Orientation; } }
 
 		string IFieldOccupant.Tag
 		{

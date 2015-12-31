@@ -23,12 +23,8 @@ namespace SurfaceGameBasics.Test
 
 		public CheckBox PlacedCheckBox { get; private set; }
 
-		public override Point Position
-		{
-			get
-			{
-				return ((Microsoft.Surface.Presentation.Controls.ScatterViewItem)Parent).Center;
-			}
-		}
+		public override Point Position { get { return ((Microsoft.Surface.Presentation.Controls.ScatterViewItem)Parent).Center; } }
+		public override double OrientationAngle { get { return ((Microsoft.Surface.Presentation.Controls.ScatterViewItem)Parent).Orientation; } }
+
 	}
 }
