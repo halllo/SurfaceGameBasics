@@ -31,7 +31,7 @@
 					<local:AllTagsVisualizationDefinition TagRemovedBehavior="Fade" Source="TagVisual.xaml"/>
 				</s:TagVisualizer.Definitions>
 
-                <local:FieldsView/>
+                <local:ExampleFieldsView/>
 
             </s:TagVisualizer>
         </Grid>
