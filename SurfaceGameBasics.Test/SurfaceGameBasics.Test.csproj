@@ -102,9 +102,6 @@
     <Compile Include="..\SurfaceGameBasics\FieldsView.cs">
       <Link>FieldsView.cs</Link>
     </Compile>
-    <Compile Include="..\SurfaceGameBasics\Properties\Settings.Designer.cs">
-      <Link>Properties\Settings.Designer.cs</Link>
-    </Compile>
     <Compile Include="..\SurfaceGameBasics\ScatterViewItemFieldObject.cs">
       <Link>ScatterViewItemFieldObject.cs</Link>
     </Compile>
@@ -136,9 +133,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\SurfaceGameBasics\Properties\Settings.settings">
-      <Link>Properties\Settings.settings</Link>
-    </None>
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
